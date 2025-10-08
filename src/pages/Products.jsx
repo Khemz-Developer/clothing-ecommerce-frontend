@@ -64,11 +64,11 @@ const Products = () => {
       return;
     }
 
-    if (!isAuthenticated) {
-      alert("Please login to add items to cart");
-      navigate("/login");
-      return;
-    }
+    // if (!isAuthenticated) {
+    //   alert("Please login to add items to cart");
+    //   navigate("/login");
+    //   return;
+    // }
 
     try {
       await addToCart(product._id, 1, size);
@@ -84,12 +84,12 @@ const Products = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Products</h1>
+    <div className="container px-4 py-8 mx-auto">
+      <h1 className="mb-6 text-3xl font-bold">Products</h1>
 
       {/* Filters */}
-      <div className="bg-white p-4 rounded shadow mb-6">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+      <div className="p-4 mb-6 bg-white rounded shadow">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-5">
           <input
             type="text"
             name="search"
@@ -146,32 +146,32 @@ const Products = () => {
 
       {/* Products Grid */}
       {loading ? (
-        <div className="text-center py-8">Loading products...</div>
+        <div className="py-8 text-center">Loading products...</div>
       ) : products.length === 0 ? (
-        <div className="text-center py-8">No products found</div>
+        <div className="py-8 text-center">No products found</div>
       ) : (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-4">
             {products.map((product) => (
-              <div key={product._id} className="bg-white rounded shadow p-4">
+              <div key={product._id} className="p-4 bg-white rounded shadow">
                 <img
                   src={product.imageUrl}
                   alt={product.name}
-                  className="w-full h-48 object-cover rounded mb-4"
+                  className="object-cover w-full h-48 mb-4 rounded"
                 />
-                <h3 className="font-bold text-lg mb-2">{product.name}</h3>
-                <p className="text-gray-600 text-sm mb-2">
+                <h3 className="mb-2 text-lg font-bold">{product.name}</h3>
+                <p className="mb-2 text-sm text-gray-600">
                   {product.description}
                 </p>
-                <p className="text-xl font-bold text-green-600 mb-2">
+                <p className="mb-2 text-xl font-bold text-green-600">
                   ${product.price}
                 </p>
-                <p className="text-sm text-gray-500 mb-2">
+                <p className="mb-2 text-sm text-gray-500">
                   Category: {product.category}
                 </p>
 
                 <div className="mb-3">
-                  <label className="block text-sm font-medium mb-1">
+                  <label className="block mb-1 text-sm font-medium">
                     Select Size:
                   </label>
                   <div className="flex gap-2">
@@ -194,13 +194,13 @@ const Products = () => {
                 <div className="flex gap-2">
                   <button
                     onClick={() => navigate(`/products/${product._id}`)}
-                    className="flex-1 bg-gray-200 text-gray-800 py-2 rounded hover:bg-gray-300"
+                    className="flex-1 py-2 text-gray-800 bg-gray-200 rounded hover:bg-gray-300"
                   >
                     View Details
                   </button>
                   <button
                     onClick={() => handleAddToCart(product)}
-                    className="flex-1 bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+                    className="flex-1 py-2 text-white bg-blue-600 rounded hover:bg-blue-700"
                   >
                     Add to Cart
                   </button>
@@ -210,7 +210,7 @@ const Products = () => {
           </div>
 
           {/* Pagination Controls */}
-          <div className="flex justify-center items-center gap-4 mt-8">
+          <div className="flex items-center justify-center gap-4 mt-8">
             <button
               onClick={() =>
                 setPagination((prev) => ({
